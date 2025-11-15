@@ -1,0 +1,15 @@
+<h2>title</h2>
+
+@if(survey) {
+<h3>{{ survey.id }}</h3>
+<h3>{{ survey.title }}</h3>
+<p>{{ survey.description }}</p>
+@if (survey.questions && survey.questions.length > 0) {
+<h4>Questions:</h4>
+@for (q of survey.questions; track q.questionId) {
+<p>{{ q.questionId }}</p>
+<p>{{ q.questionText }}</p>
+} } } @else {
+<p>No questions available.</p>
+}
+<button (click)="goBack()">Back to Survey List</button>

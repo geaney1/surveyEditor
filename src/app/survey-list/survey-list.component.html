@@ -1,0 +1,23 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="email">Email:</label>
+    <input
+      id="email"
+      type="email"
+      placeholder="Enter your email"
+      formControlName="email"
+    />
+    @if (form.get('email')?.invalid && (form.get('email')?.dirty ||
+    form.get('email')?.touched)) {
+    <div class="error">
+      @if (form.get('email')?.hasError('required')) {
+      <small>Email is required</small>
+      } @if (form.get('email')?.hasError('email')) {
+      <small>Please enter a valid email address</small>
+      }
+    </div>
+    }
+  </div>
+
+  <button type="submit" [disabled]="form.invalid">Submit</button>
+</form>

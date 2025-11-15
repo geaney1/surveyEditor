@@ -1,0 +1,72 @@
+<h2>Add New Survey</h2>
+
+<form [formGroup]="updateSurveyForm" (ngSubmit)="onSubmit()">
+  <!-- ID Field -->
+  <div class="form-group">
+    <label for="id">ID:</label>
+    <input id="id" type="text" formControlName="id" />
+    @if (id?.invalid && (id?.dirty || id?.touched)) {
+    <div class="error">
+      @if (id?.errors?.['required']) {
+      <small>ID is required.</small>
+      } @if (id?.errors?.['minlength']) {
+      <small>ID must be at least 3 characters long.</small>
+      }
+    </div>
+    }
+  </div>
+  <!-- Title Field -->
+  <div class="form-group">
+    <label for="title">Title:</label>
+    <input id="title" type="text" formControlName="title" />
+    @if (title?.invalid && (title?.dirty || title?.touched)) {
+    <div class="error">
+      @if (title?.errors?.['required']) {
+      <small>Title is required.</small>
+      } @if (title?.errors?.['minlength']) {
+      <small>Title must be at least 3 characters long.</small>
+      }
+    </div>
+    }
+  </div>
+
+  <!-- Description Field -->
+  <div class="form-group">
+    <label for="description">Description:</label>
+    <textarea id="description" formControlName="description"></textarea>
+    @if (description?.invalid && (description?.dirty || description?.touched)) {
+    <div class="error">
+      @if (description?.errors?.['required']) {
+      <small>Description is required.</small>
+      } @if (description?.errors?.['minlength']) {
+      <small>Description must be at least 10 characters long.</small>
+      }
+    </div>
+    }
+  </div>
+
+  <!--  Checkbox example
+    <div class="form-group checkbox-group">
+        <label class="inline" for="xxx">xxxx</label>
+        <input id="xxx" type="checkbox" formControlName="xxx" />
+    </div> -->
+
+  <!-- Submit Button -->
+  <button type="submit" [disabled]="updateSurveyForm.invalid">
+    Add Survey
+  </button>
+</form>
+
+<!-- Success Message -->
+@if (submissionSuccess) {
+<div class="success">
+  <p>Survey successfully updateed!</p>
+</div>
+}
+
+<!-- Error Message -->
+@if (submissionError) {
+<div class="error">
+  <p>{{ submissionError }}</p>
+</div>
+}

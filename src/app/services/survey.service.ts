@@ -1,0 +1,76 @@
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { catchError, Observable, of, throwError } from 'rxjs';
+import { Survey } from '../models/survey';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class SurveyService {
+  private http = inject(HttpClient);
+  private readonly baseUrl: string = 'https://techtestapi1.azurewebsites.net';
+  private selectedSurvey: Survey | null = null;
+
+  setSelectedSurvey(Survey: Survey) {
+    this.selectedSurvey = Survey;
+  }
+
+  getSelectedSurvey(): Survey | null {
+    return this.selectedSurvey;
+  }
+
+  /**
+   * Get all surveys created by the user
+   */
+  getSurveys(description?: string | null): Observable<Survey[]> {
+    let url = `${this.baseUrl}/survey`;
+    if (description) {
+      url += `?description=${description}`;
+    }
+    return this.http.get<Survey[]>(url).pipe(
+      catchError((error) => {
+        console.error('Error getting surveylist', error);
+        return of([]);
+      })
+    );
+  }
+
+  /**
+   * GET a survey by id
+   */
+  getSurveyById(id: number): Observable<Survey> {
+    return this.http.get<Survey>(`${this.baseUrl}/Surveys/${id}`).pipe(
+      catchError((error) => {
+        console.error(`Error getting survey id of ${id}:`, error);
+        return of({} as Survey);
+      })
+    );
+  }
+
+  /**
+   * Post a new Survey
+   */
+  addSurvey(survey: Survey): Observable<Survey> {
+    const url = `${this.baseUrl}/survey`;
+    //console.log('Adding survey at URL:', url, 'with data:', survey);
+    return this.http.post<Survey>(`${url}`, survey).pipe(
+      catchError((error) => {
+        console.error('Error adding survey', error);
+        return throwError(() => error);
+      })
+    );
+  }
+  /**
+   * Put a new Survey
+   */
+  updateSurvey(survey: Survey): Observable<Survey> {
+    const url = `${this.baseUrl}/surveyId`;
+    console.log('Updating survey at URL:', url, 'with data:', survey);
+    return this.http.put<Survey>(`${url}`, survey).pipe(
+      catchError((error) => {
+        console.error('Error updating survey', error);
+        return throwError(() => error);
+      })
+    );
+  }
+}
