@@ -1,1 +1,51 @@
-<p>question-update works!</p>
+@if (updateQuestionForm) {
+<form class="update-question" [formGroup]="updateQuestionForm">
+  <div class="id-and-type">
+    <!--- Question ID  --->
+    <button mat-button class="id-input" type="button" aria-label="Question ID" disabled>{{ questionIdStr }}</button>
+
+    <!--- Question Type Input -->
+    <mat-form-field>
+      <mat-select [value]="questType" aria-label="Question Type">
+        @for (qt of qTypes; track qt) {
+        <mat-option [value]="qt.value">{{ qt.viewValue }}</mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!--- Question Text Input --->
+  <mat-form-field class="text-input">
+    <mat-label>Question</mat-label>
+    <input matInput type="text" formControlName="questionText" aria-label="Question"
+      placeholder="Enter the question text">
+    @if (updateQuestionForm.get('questionText')?.value) {
+    <button matSuffix matIconButton class="clear-button" aria-label="Clear"
+      (click)="updateQuestionForm.patchValue({ questionText: '' })">
+      <mat-icon>X</mat-icon>
+    </button>
+    }
+    @if (updateQuestionForm.get('questionText')?.hasError('questionText') &&
+    !updateQuestionForm.get('questionText')?.hasError('required')) {
+    <mat-error>Please enter a valid question</mat-error>
+    }
+    @if (updateQuestionForm.get('questionText')?.hasError('required')) {
+    <mat-error>Title is <strong>required</strong></mat-error>
+    }
+  </mat-form-field>
+
+  <div class="button-toggle-group">
+    <!--- Randomize Options Toggle --->
+    <div class="toggle-field">
+      <mat-slide-toggle formControlName="randomizeOptionsInd" aria-label="Randomize Options" labelPosition="before">
+        Randomize Options
+      </mat-slide-toggle>
+
+    <!--- Mandatory Toggle --->
+      <mat-slide-toggle formControlName="mandatoryInd" aria-label="Make Required" labelPosition="before">
+        Make Required
+      </mat-slide-toggle>
+    </div>
+  </div>
+</form>
+}

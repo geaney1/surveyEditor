@@ -22,12 +22,8 @@ export class SurveyService {
   /**
    * Get all surveys created by the user
    */
-  getSurveys(description?: string | null): Observable<Survey[]> {
-    let url = `${this.baseUrl}/survey`;
-    if (description) {
-      url += `?description=${description}`;
-    }
-    return this.http.get<Survey[]>(url).pipe(
+  getSurveys(): Observable<Survey[]> {
+    return this.http.get<Survey[]>(`${this.baseUrl}/survey`).pipe(
       catchError((error) => {
         console.error('Error getting surveylist', error);
         return of([]);
@@ -38,10 +34,10 @@ export class SurveyService {
   /**
    * GET a survey by id
    */
-  getSurveyById(id: number): Observable<Survey> {
-    return this.http.get<Survey>(`${this.baseUrl}/Surveys/${id}`).pipe(
+  getSurveyById(surveyId: string): Observable<Survey> {
+    return this.http.get<Survey>(`${this.baseUrl}/Surveys/${surveyId}`).pipe(
       catchError((error) => {
-        console.error(`Error getting survey id of ${id}:`, error);
+        console.error(`Error getting survey id of ${surveyId}:`, error);
         return of({} as Survey);
       })
     );

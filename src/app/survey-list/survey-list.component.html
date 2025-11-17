@@ -1,23 +1,27 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div>
-    <label for="email">Email:</label>
-    <input
-      id="email"
-      type="email"
-      placeholder="Enter your email"
-      formControlName="email"
-    />
-    @if (form.get('email')?.invalid && (form.get('email')?.dirty ||
-    form.get('email')?.touched)) {
-    <div class="error">
-      @if (form.get('email')?.hasError('required')) {
-      <small>Email is required</small>
-      } @if (form.get('email')?.hasError('email')) {
-      <small>Please enter a valid email address</small>
-      }
-    </div>
-    }
-  </div>
+<form class="survey-list" [formGroup]="surveyListForm" (ngSubmit)="onSubmit()">
+<mat-form-field class="email-input">
+  <mat-label>Email</mat-label>
+  <input matInput type="email" formControlName="email"
+           placeholder="Enter your email" aria-label="Email">
+  @if (surveyListForm.get('email')?.value) {
+    <button matSuffix matIconButton class="clear-button" aria-label="Clear" (click)="clearEmail()">
+      <mat-icon>X</mat-icon>
+    </button>
+  }
+  @if (surveyListForm.get('email')?.hasError('email') && !surveyListForm.get('email')?.hasError('required')) {
+    <mat-error>Please enter a valid email address</mat-error>
+  }
+  @if (surveyListForm.get('email')?.hasError('required')) {
+    <mat-error>Email is <strong>required</strong></mat-error>
+  }
+  </mat-form-field>
 
-  <button type="submit" [disabled]="form.invalid">Submit</button>
+  <button class="submit-button"type="submit" [disabled]="surveyListForm.invalid">Submit</button>
+
+  @if(surveys && surveys.length > 0){ 
+    @for(survey of surveys; track survey.id) {
+    <app-survey-card [survey]="survey"></app-survey-card>
+    }
+  }
+
 </form>

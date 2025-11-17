@@ -1,1 +1,10 @@
-<p>question-card works!</p>
+<h2>{{ title }}</h2>
+@if(question) {
+<div class="question-card">
+    <h3>{{ question.questionText }}</h3>
+    <p>{{ question.questionText }}</p>
+      @for(o of question.options; track o) {
+        <li>{{ o }}</li>
+    }
+</div>
+}

@@ -1,1 +1,71 @@
-/* You can add global styles to this file, and also import other style files */
+html {
+  height: 100%;
+  font-size: 62.5%; /* setting the default to 10px */
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+form,
+body {
+  height: 100%;
+  font-size: 1.6rem; /* 16px */
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.form-group {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    margin-bottom: 1rem;
+}
+
+input,
+select,
+textarea {
+  width: 60%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+input[type="checkbox"] {
+  width: 10%;
+}
+
+textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+.error {
+  color: #e53935;
+  font-size: 1.2rem;
+}
+
+button {
+  background-color: #0072b1;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+button:disabled {
+  //background-color: #7f8389;
+  cursor: not-allowed;
+}
+
+.success {
+  margin-top: 1rem;
+  color: #28a745;
+  font-weight: bold;
+}
