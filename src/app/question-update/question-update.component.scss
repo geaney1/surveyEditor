@@ -1,5 +1,5 @@
 .question-update {
-   background-color: #b7bce6;
+  background-color: #b7bce6;
   border: 1px solid #b9bbbe;
   display: flex;
   flex-direction: column;
@@ -36,14 +36,7 @@
   gap: 5rem;
 }
 
-.clear-button {
-  color: red;
-  background-color: transparent;
-  font-weight: bold;
-  padding: 0.5rem 1rem;
-}
-
- .toggle-field {
+.toggle-field {
   padding: 0.5rem 1rem;
   display: flex;
   flex-direction: row;
@@ -56,23 +49,23 @@
         height: 32px;
         position: relative;
       }
-      
+
       .mdc-switch__track {
         height: 20px;
         border-radius: 10px;
       }
-      
+
       .mdc-switch__handle-track {
         width: 48px;
       }
-      
+
       .mdc-switch__handle {
         width: 16px;
         height: 16px;
-        
+
         // Add minus sign for unchecked state
         &::before {
-          content: '−';
+          content: "−";
           position: absolute;
           font-size: 16px;
           font-weight: bold;
@@ -87,34 +80,29 @@
           transform: translate(-50%, -50%);
         }
       }
-      
+
       // Add plus sign for checked state
       .mdc-switch--selected .mdc-switch__handle::before {
-        content: '+';
+        content: "+";
       }
-      
+
       .mdc-switch--selected .mdc-switch__track::after {
         background: #0072b1;
       }
-      
+
       .mdc-switch--unselected .mdc-switch__track::after {
-        //background: #ccc;
+        background: #ccc;
       }
-      
+
       .mdc-label {
         margin-left: 8px;
         font-size: 14px;
       }
     }
   }
- }
- 
-  // Hide checkmarks in mat-select options
-  ::ng-deep .mat-mdc-option .mat-pseudo-checkbox mat-slider-toggle mat-select {
-    display: none !important;
-  }
+}
 
-  mat-error {
-    color: #e53935;
-    font-size: 1.2rem;
-  }
+// Hide checkmarks in mat-select options
+::ng-deep .mat-mdc-option .mat-pseudo-checkbox mat-slider-toggle mat-select {
+  display: none !important;
+}

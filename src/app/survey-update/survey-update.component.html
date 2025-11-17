@@ -30,30 +30,14 @@
       <mat-icon>X</mat-icon>
     </button>
   }
+  <!--
   @if (updateSurveyForm.get('description')?.hasError('description') && !updateSurveyForm.get('description')?.hasError('required')) {
     <mat-error>Please enter a valid description</mat-error>
-  }
+} -->
   @if (updateSurveyForm.get('description')?.hasError('required')) {
     <mat-error>Description is <strong>required</strong></mat-error>
-  }
+} 
   </mat-form-field>
-
-  
-   @if(questions && questions.length > 0) { 
-    @for(quest of questions; track quest.questionId) {
-      <app-question-card [question]="quest"></app-question-card>
-    }
-  }
-  <!-- Add Question Button -->
-  <button type="button" (click)="addNewQuestion()">Add new question</button>
-  
-  <!-- New Question Form -->
-  @if(showQuestionForm && isAddNewSurvey) {
-    <app-question-update [question]="question" [isAddNewQuestion]="true" [questionCnt]="questions.length + 1" ></app-question-update>
-  }
-  
-  
-  
 
   <!-- Submit Button -->
   <button class="submit-button" type="submit" [disabled]="updateSurveyForm.invalid">

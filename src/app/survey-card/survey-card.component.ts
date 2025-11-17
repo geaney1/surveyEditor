@@ -13,3 +13,10 @@ export class SurveyCardComponent {
   @Input() survey!: Survey;
   readonly title = 'Survey Details'; 
 }
+
+  /**
+   * Set user token from surveyListForm email value
+   */
+  onSubmit(): void {
+    
+  }

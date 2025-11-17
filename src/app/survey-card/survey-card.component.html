@@ -4,11 +4,14 @@
     <p>{{ survey.description }}</p>
     <div>
         @if (survey.questions && survey.questions.length > 0) {
-        <h4>Questions:</h4>
         @for(question of survey.questions; track question.questionId) {
         <app-question-card [question]="question"></app-question-card>
         }
         }
     </div>
+     <!-- Submit Button -->
+  <button class="submit-button" type="submit" onSubmit(survey.id)>
+    Edit Survey
+  </button>
 </form>
 }

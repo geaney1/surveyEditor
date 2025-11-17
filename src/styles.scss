@@ -41,10 +41,6 @@ textarea {
   height: 100px;
 }
 
-.error {
-  color: #e53935;
-  font-size: 1.2rem;
-}
 
 button {
   background-color: #0072b1;
@@ -69,3 +65,29 @@ button:disabled {
   color: #28a745;
   font-weight: bold;
 }
+
+  .submit-button {
+    width: 15rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin-right: 1rem;
+  }
+
+  mat-error {
+    color: #e53935;
+    font-size: 1.2rem;
+  }
+  
+  .clear-button {
+    color: red;
+    background-color: transparent;
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+    align-items: center;
+    justify-content: center;
+    line-height: 18px;
+  }

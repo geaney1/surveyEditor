@@ -1,5 +1,5 @@
 .question-card {
- background-color: #b7bce6;
+  background-color: #b7bce6;
   border: 1px solid #b9bbbe;
   display: flex;
   flex-direction: column;
@@ -8,6 +8,12 @@
   margin: 2rem;
   border-radius: 4px;
 }
+
+h4 {
+  margin: 0;
+  padding-bottom: 0;
+}
+
 p {
   margin: 0;
   padding-bottom: 0;
