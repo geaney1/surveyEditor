@@ -1,9 +1,23 @@
 .question-card {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
+ background-color: #b7bce6;
+  border: 1px solid #b9bbbe;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   padding: 1rem;
-  margin-bottom: 1rem;
+  margin: 2rem;
   border-radius: 4px;
+}
+p {
+  margin: 0;
+  padding-bottom: 0;
+  text-decoration: underline;
+}
+
+ul {
+  margin-top: 0;
+  list-style-type: disc;
+  padding-left: 2rem;
 }
 
 button {

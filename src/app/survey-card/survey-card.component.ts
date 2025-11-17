@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { Survey } from '../models/survey';
+import { QuestionCardComponent } from "../question-card/question-card.component";
 
 @Component({
   selector: 'app-survey-card',
   standalone: true,
-  imports: [],
+  imports: [QuestionCardComponent],
   templateUrl: './survey-card.component.html',
   styleUrl: './survey-card.component.scss',
 })

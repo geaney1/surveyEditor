@@ -1,10 +1,13 @@
-<h2>{{ title }}</h2>
-@if(question) {
 <div class="question-card">
-    <h3>{{ question.questionText }}</h3>
-    <p>{{ question.questionText }}</p>
-      @for(o of question.options; track o) {
-        <li>{{ o }}</li>
+  @if(question) {
+  <h2>{{ title }}</h2>
+  @if(question.options && question.options.length > 0) {
+  <p class="options-label">{{ question.questionText }}</p>
+  <ul>
+    @for(qu of question.options; track qu) {
+    <li>{{ qu }}</li>
     }
+  </ul>
+  }
+  }
 </div>
-}

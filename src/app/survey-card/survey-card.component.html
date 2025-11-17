@@ -1,13 +1,14 @@
-
-<h2>{{ survey.title }}</h2>
 @if(survey) {
-<div class="survey-card">
-    <h3>{{ survey.title }}</h3>
+<form class="survey-card">
+    <h4>{{ survey.title }}</h4>
     <p>{{ survey.description }}</p>
-    <!--@for(question of survey.questions; track question.questionId) {
-        <app-question [question]="question"></app-question>
-    }
--->
-</div>
+    <div>
+        @if (survey.questions && survey.questions.length > 0) {
+        <h4>Questions:</h4>
+        @for(question of survey.questions; track question.questionId) {
+        <app-question-card [question]="question"></app-question-card>
+        }
+        }
+    </div>
+</form>
 }
-
