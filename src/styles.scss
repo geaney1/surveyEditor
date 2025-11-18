@@ -11,7 +11,6 @@ html {
 
 form,
 body {
-  //height: 100%;
   font-size: 1.6rem; /* 16px */
   margin: 0;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
@@ -51,6 +50,7 @@ button {
   border-radius: 4px;
 }
 
+
 button:hover {
   opacity: 0.8;
 }
@@ -58,6 +58,15 @@ button:hover {
 button:disabled {
   //background-color: #7f8389;
   cursor: not-allowed;
+}
+
+.submit-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin-right: 1rem;
 }
 
 .success {

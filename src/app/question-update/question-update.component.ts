@@ -14,8 +14,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatOptionModule } from '@angular/material/core';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import { AuthService } from '../services/auth.service';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { SurveyService } from '../services/survey.service';
 
 const questionTypes = [
@@ -44,9 +43,9 @@ const questionTypes = [
   styleUrl: './question-update.component.scss',
 })
 export class QuestionUpdateComponent implements OnInit {
-  private authService = inject(AuthService);
+  //private authService = inject(AuthService);
   private surveyService = inject(SurveyService);
-  readonly userToken = this.authService.getToken();
+  // readonly userToken = this.authService.getToken();
   survey = new Survey();
   question = new Question();
   questionCnt = 0;
@@ -66,6 +65,7 @@ export class QuestionUpdateComponent implements OnInit {
   questionCards: string[] = [];
   questionOptions: string[] = [];
   showQuestionForm = false;
+
   constructor() {
     this.updateQuestionForm = this.fb.group({
       questionText: ['', [Validators.minLength(0)]],
@@ -77,78 +77,15 @@ export class QuestionUpdateComponent implements OnInit {
       instructions: ['', [Validators.min(0)]],
     });
   }
+
   ngOnInit(): void {
-    if (this.authService.getToken()) {
-      this.route.queryParamMap.subscribe((params) => {
-        const id = params.get('id');
-        if (id) {
-          this.isAddNewQuestion = false;
-          this.loadSurveyById(id as string);
-        } else {
-          this.survey = new Survey();
-          this.updateQuestionForm = this.fb.group({
-            title: [this.survey.title, [Validators.minLength(3)]],
-            description: [this.survey.description, [Validators.minLength(0)]],
-          });
-        }
-      });
-    }
-
-  
-
-
-    /* Set the Question ID */
-    if (this.isAddNewQuestion) {
-      this.questionIdStr = `Q${this.questionCnt}`;
-    } else if (this.question?.questionId) {
-      this.questionIdStr = `Q${this.question.questionId}`;
-    }
-
-    /*-- set the question Type --*/
-    if (this.question?.questionType) {
-      this.questType = this.question.questionType;
-    }
-
-    /** get the question Text */
-    if (this.question?.questionText) {
-      this.questText = this.question.questionText;
-    }
-
-    /*-- set question options fields --*/
-    this.questionOptions = this.question?.options ? this.question.options : [];
-
-    /** set the question cards */
-    this.questionCards = this.question?.cards ? this.question.cards : [];
-
-    /** set mandatory options indicator */
-    if (this.question?.mandatoryInd) {
-      this.manInd = this.question.mandatoryInd as boolean;
-    }
-    /** set randomize options indicator */
-    if (this.question?.randomizeOptionsInd) {
-      this.randOptionsInd = this.question.randomizeOptionsInd as boolean;
-    }
-
-    /** set the programmer notes */
-    if (this.question?.programmerNotes) {
-      this.progNotes = this.question.programmerNotes;
-    }
-
-    /** set the instruction fields */
-    if (this.question?.instructions) {
-      this.instruct = this.question.instructions;
-    }
-/*
-    this.updateQuestionForm = this.fb.group({
-      questionText: [this.questText, [Validators.minLength(0)]],
-      randomizeOptionsInd: [this.randOptionsInd],
-      mandatoryInd: [this.manInd],
-      options: [this.questionOptions, [Validators.min(1)]],
-      cards: [this.questionCards, [Validators.min(0)]],
-      programmerNotes: [this.progNotes, [Validators.min(0)]],
-      instructions: [this.instruct, [Validators.min(0)]],
+    this.route.queryParamMap.subscribe((params) => {
+      const id = params.get('id');
+      if (id) {
+        this.isAddNewQuestion = false;
+        this.loadSurveyById(id as string);
+      }
     });
-*/
   }
 
   get questionText() {
@@ -178,12 +115,16 @@ export class QuestionUpdateComponent implements OnInit {
     this.surveyService.getSurveyById(id).subscribe({
       next: (data: Survey) => {
         this.survey = data;
-        if (!this.survey.title) { this.survey.title = ''; }
-        if (!this.survey.description) { this.survey.description = ''; }
+        if (!this.survey.title) {
+          this.survey.title = '';
+        }
+        if (!this.survey.description) {
+          this.survey.description = '';
+        }
         this.updateQuestionForm = this.fb.group({
-            title: [this.survey.title, [Validators.minLength(3)]],
-            description: [this.survey.description, [Validators.minLength(0)]],
-          });
+          title: [this.survey.title, [Validators.minLength(3)]],
+          description: [this.survey.description, [Validators.minLength(0)]],
+        });
       },
       error: (err: Error) => {
         console.error('Error fetching survey by ID:', err);

@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { AuthService } from '../services/auth.service';
+//import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-survey-update',
@@ -25,10 +25,10 @@ import { AuthService } from '../services/auth.service';
   styleUrls: ['./survey-update.component.scss'],
 })
 export class SurveyUpdateComponent implements OnInit {
-  private authService = inject(AuthService);
+  //private authService = inject(AuthService);
   private surveyService = inject(SurveyService);
   private route = inject(ActivatedRoute);
-  readonly userToken = this.authService.getToken();
+  //readonly userToken = this.authService.getToken();
   survey = new Survey;
   isAddNewSurvey = true; // set to false if updating a new survey
   private fb = inject(FormBuilder);
@@ -36,7 +36,7 @@ export class SurveyUpdateComponent implements OnInit {
   submissionSuccess = false;
   submissionError = '';
   showQuestionForm = false;
-  updateTitle = 'Add New Survey';
+  updateTitle = 'Add Survey';
 
   ngOnInit(): void {
     this.updateSurveyForm = this.fb.group({

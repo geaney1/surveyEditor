@@ -59,7 +59,7 @@ export class SurveyListComponent implements OnInit {
     }
 
     /**
-     * Handle email input changes - clear token if email is empty
+     * Handle email input changes 
      */
     onEmailInput(): void {
         const emailValue = this.surveyListForm.get('email')?.value;

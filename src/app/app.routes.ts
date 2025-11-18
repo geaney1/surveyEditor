@@ -11,5 +11,5 @@ export const routes: Routes = [
     { path: 'survey-update', component: SurveyUpdateComponent }, 
     { path: 'survey-update/:id', component: SurveyUpdateComponent }, 
     { path: 'question-update/:id', component: QuestionUpdateComponent }, 
-    { path: 'question-update/:id/quesid', component: QuestionUpdateComponent } 
+    { path: 'question-update/:id/:quesid', component: QuestionUpdateComponent } 
   ];

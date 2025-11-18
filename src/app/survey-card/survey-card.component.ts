@@ -13,7 +13,7 @@ import { QuestionCardComponent } from '../question-card/question-card.component'
 export class SurveyCardComponent {
   @Input() survey!: Survey;
   private router = inject(Router);
-  readonly title = 'Add New Survey';
+  readonly title = 'Add  Survey';
 
   /**
    * Navigate to survey update page with survey data

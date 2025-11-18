@@ -35,8 +35,7 @@ export class SurveyService {
    * GET a survey by id
    */
   getSurveyById(surveyId: string): Observable<Survey> {
-    const url = `${this.baseUrl}/${surveyId}`;
-    return this.http.get<Survey>(`${url}`).pipe(
+    return this.http.get<Survey>(`${this.baseUrl}/${surveyId}`).pipe(
       catchError((error) => {
         console.error(`Error getting survey id of ${surveyId}:`, error);
         return of({} as Survey);
@@ -59,8 +58,7 @@ export class SurveyService {
    * Put a new Survey
    */
   updateSurvey(survey: Survey): Observable<Survey> {
-    const url = `${this.baseUrl}/${survey.id}`;
-    return this.http.put<Survey>(`${url}`, survey).pipe(
+    return this.http.put<Survey>(`${this.baseUrl}/${survey.id}`, survey).pipe(
       catchError((error) => {
         console.error('Error updating survey', error);
         return throwError(() => error);

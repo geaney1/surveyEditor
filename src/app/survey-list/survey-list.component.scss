@@ -10,22 +10,14 @@
 }
 
 .email-input {
-    align-iten: justify-contents-between;
-    display: block;
+    //align-items: justify-contents-between;
+    display: inline-flex;
 }
 
 .text-input {
     display: flex-box;
 }
-.submit-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    margin-right: 1rem;
 
-}
 
 .submit-button:hover {
     background-color: #0056b3;
