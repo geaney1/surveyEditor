@@ -1,17 +1,18 @@
 @if(survey) {
 <form class="survey-card">
-    <h4>{{ survey.title }}</h4>
-    <p>{{ survey.description }}</p>
-    <div>
-        @if (survey.questions && survey.questions.length > 0) {
-        @for(question of survey.questions; track question.questionId) {
-        <app-question-card [question]="question"></app-question-card>
-        }
-        }
-    </div>
-     <!-- Submit Button -->
-  <button class="submit-button" type="submit" onSubmit(survey.id)>
-    Edit Survey
-  </button>
+  <h4>{{ survey.title }}</h4>
+  <p>{{ survey.description }}</p>
+  <div>
+    @if (survey.questions && survey.questions.length > 0) {
+    @for(question of survey.questions; track question.questionId) {
+    <app-question-card [question]="question"></app-question-card>
+    }
+    }
+
+    <!-- Submit Button -->
+    <button class="submit-button" type="button" (click)="onSubmit(survey.id)">
+      Edit Survey
+    </button>
+  </div>
 </form>
 }

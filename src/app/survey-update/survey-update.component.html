@@ -1,4 +1,4 @@
-<h2>Add New Survey</h2>
+<h2>{{ updateTitle }}</h2>
 
 <form class="update-survey" [formGroup]="updateSurveyForm" (ngSubmit)="onSubmit()">
 
@@ -40,7 +40,8 @@
   </mat-form-field>
 
   <!-- Submit Button -->
-  <button class="submit-button" type="submit" [disabled]="updateSurveyForm.invalid">
+  <button class="submit-button" type="submit" (click)="onSubmit()"
+          [disabled]="survey === null || updateSurveyForm.invalid">
     Save Survey
   </button>
 </form>

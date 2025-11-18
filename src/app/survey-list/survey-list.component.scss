@@ -10,13 +10,12 @@
 }
 
 .email-input {
-    width: 100%;
+    align-iten: justify-contents-between;
     display: block;
 }
 
 .text-input {
-    width: 100%;
-    display: block;
+    display: flex-box;
 }
 .submit-button {
     background-color: #007bff;

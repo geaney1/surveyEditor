@@ -9,7 +9,6 @@ function getToken(): string | null {
 
 export const AuthInterceptor: HttpInterceptorFn = (req, next) => {
   const token = getToken();
-
   // Only attach header if token exists
   const clonedRequest = token
     ? req.clone({

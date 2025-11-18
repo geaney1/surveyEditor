@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Survey } from '../models/survey';
-import { QuestionCardComponent } from "../question-card/question-card.component";
+import { QuestionCardComponent } from '../question-card/question-card.component';
 
 @Component({
   selector: 'app-survey-card',
@@ -11,12 +12,18 @@ import { QuestionCardComponent } from "../question-card/question-card.component"
 })
 export class SurveyCardComponent {
   @Input() survey!: Survey;
-  readonly title = 'Survey Details'; 
-}
+  private router = inject(Router);
+  readonly title = 'Add New Survey';
 
   /**
-   * Set user token from surveyListForm email value
+   * Navigate to survey update page with survey data
    */
-  onSubmit(): void {
-    
+  onSubmit(surveyId: string | null): void {
+    if (surveyId === undefined || surveyId == null) {
+      return;
+    }
+    this.router.navigate([`/survey-update/:${surveyId}`], {
+      state: { survey: this.survey, isAddNewSurvey: false },
+    });
   }
+}

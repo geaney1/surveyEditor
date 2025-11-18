@@ -14,9 +14,10 @@
     @if (surveyListForm.get('email')?.hasError('required')) {
     <mat-error>Email is <strong>required</strong></mat-error>
     }
+
+    <button class="submit-button" type="submit" [disabled]="surveyListForm.invalid">Submit</button>
   </mat-form-field>
 
-  <button class="submit-button" type="submit" [disabled]="surveyListForm.invalid">Submit</button>
   <div>
   @if(surveys && surveys.length > 0){
     @for(survey of surveys; track survey.id) {

@@ -8,7 +8,7 @@ import { Survey } from '../models/survey';
 })
 export class SurveyService {
   private http = inject(HttpClient);
-  private readonly baseUrl: string = 'https://techtestapi1.azurewebsites.net';
+  private readonly baseUrl = 'https://techtestapi1.azurewebsites.net/Survey';
   private selectedSurvey: Survey | null = null;
 
   setSelectedSurvey(Survey: Survey) {
@@ -23,7 +23,7 @@ export class SurveyService {
    * Get all surveys created by the user
    */
   getSurveys(): Observable<Survey[]> {
-    return this.http.get<Survey[]>(`${this.baseUrl}/survey`).pipe(
+    return this.http.get<Survey[]>(`${this.baseUrl}`).pipe(
       catchError((error) => {
         console.error('Error getting surveylist', error);
         return of([]);
@@ -35,7 +35,8 @@ export class SurveyService {
    * GET a survey by id
    */
   getSurveyById(surveyId: string): Observable<Survey> {
-    return this.http.get<Survey>(`${this.baseUrl}/Surveys/${surveyId}`).pipe(
+    const url = `${this.baseUrl}/${surveyId}`;
+    return this.http.get<Survey>(`${url}`).pipe(
       catchError((error) => {
         console.error(`Error getting survey id of ${surveyId}:`, error);
         return of({} as Survey);
@@ -47,9 +48,7 @@ export class SurveyService {
    * Post a new Survey
    */
   addSurvey(survey: Survey): Observable<Survey> {
-    const url = `${this.baseUrl}/survey`;
-    //console.log('Adding survey at URL:', url, 'with data:', survey);
-    return this.http.post<Survey>(`${url}`, survey).pipe(
+    return this.http.post<Survey>(`${this.baseUrl}`, survey).pipe(
       catchError((error) => {
         console.error('Error adding survey', error);
         return throwError(() => error);
@@ -60,8 +59,7 @@ export class SurveyService {
    * Put a new Survey
    */
   updateSurvey(survey: Survey): Observable<Survey> {
-    const url = `${this.baseUrl}/surveyId`;
-    console.log('Updating survey at URL:', url, 'with data:', survey);
+    const url = `${this.baseUrl}/${survey.id}`;
     return this.http.put<Survey>(`${url}`, survey).pipe(
       catchError((error) => {
         console.error('Error updating survey', error);

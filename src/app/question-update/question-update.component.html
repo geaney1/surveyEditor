@@ -1,4 +1,3 @@
-@if (updateQuestionForm) {
 <form class="update-question" [formGroup]="updateQuestionForm">
   <div class="id-and-type">
     <!--- Question ID  --->
@@ -18,10 +17,10 @@
   <mat-form-field class="text-input">
     <mat-label>Question</mat-label>
     <input matInput type="text" formControlName="questionText" aria-label="Question"
-      placeholder="Enter the question text">
+           placeholder="Enter the question text">
     @if (updateQuestionForm.get('questionText')?.value) {
     <button matSuffix matIconButton class="clear-button" aria-label="Clear"
-      (click)="updateQuestionForm.patchValue({ questionText: '' })">
+            (click)="updateQuestionForm.patchValue({ questionText: '' })">
       <mat-icon>X</mat-icon>
     </button>
     }
@@ -48,4 +47,3 @@
     </div>
   </div>
 </form>
-}

@@ -1,4 +1,4 @@
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SurveyService } from '../services/survey.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-survey-update',
@@ -21,33 +22,43 @@ import { MatInputModule } from '@angular/material/input';
     MatButtonModule,
   ],
   templateUrl: './survey-update.component.html',
-  styleUrl: './survey-update.component.scss',
+  styleUrls: ['./survey-update.component.scss'],
 })
 export class SurveyUpdateComponent implements OnInit {
-  @Input() survey: Survey = new Survey();
-  @Input() isAddNewSurvey = true; // set to false if updating a new survey
-  private route = inject(ActivatedRoute);
-  private fb = inject(FormBuilder);
+  private authService = inject(AuthService);
   private surveyService = inject(SurveyService);
+  private route = inject(ActivatedRoute);
+  readonly userToken = this.authService.getToken();
+  survey = new Survey;
+  isAddNewSurvey = true; // set to false if updating a new survey
+  private fb = inject(FormBuilder);
   updateSurveyForm!: FormGroup;
   submissionSuccess = false;
   submissionError = '';
   showQuestionForm = false;
+  updateTitle = 'Add New Survey';
 
   ngOnInit(): void {
     this.updateSurveyForm = this.fb.group({
-      title: [this.survey.title, [Validators.minLength(3)]],
-      description: [this.survey.description, [Validators.minLength(0)]],
+      title: ['', [Validators.minLength(3)]],
+      description: ['', [Validators.minLength(0)]],
     });
+    this.route.queryParamMap.subscribe((params) => {
+      const id = params.get('id');
+      if (id) {
+        this.updateTitle = 'Update Survey';
+          this.isAddNewSurvey = false;
+          this.loadSurveyById(id as string);
+        }
+      });
   }
 
-
   get title() {
-    return this.updateSurveyForm.get('title');
+    return this.updateSurveyForm?.get('title');
   }
 
   get description() {
-    return this.updateSurveyForm.get('description');
+    return this.updateSurveyForm?.get('description');
   }
 
   onSubmit(): void {
@@ -56,15 +67,21 @@ export class SurveyUpdateComponent implements OnInit {
     }
 
     // ensure the question index are in order
-    if (this.survey.questions) {
+    if (this.survey?.questions) {
       for (const [index, q] of this.survey.questions.entries()) {
         q.questionId = index + 1;
       }
     }
     const selectedSurvey = {
       id: this.survey.id,
-      title: this.updateSurveyForm.value.title !== '' ? this.updateSurveyForm.value.title : null,
-      description: this.updateSurveyForm.value.description !== '' ? this.updateSurveyForm.value.description : null,
+      title:
+        this.updateSurveyForm.value.title !== ''
+          ? this.updateSurveyForm.value.title
+          : null,
+      description:
+        this.updateSurveyForm.value.description !== ''
+          ? this.updateSurveyForm.value.description
+          : null,
       questions: this.survey.questions,
     };
     if (this.isAddNewSurvey) {
@@ -75,12 +92,30 @@ export class SurveyUpdateComponent implements OnInit {
   }
 
   /**
+   * Load survey by ID from survey.service
+   */
+  loadSurveyById(id: string): void {
+    this.surveyService.getSurveyById(id).subscribe({
+      next: (data: Survey) => {
+        this.survey = data;
+        const title = this.survey.title ? this.survey.title : '';
+        const description = this.survey.description ? this.survey.description : '';
+        this.updateSurveyForm = this.fb.group({
+          title: [title, [Validators.minLength(3)]],
+          description: [description, [Validators.minLength(0)]],
+        });
+      },
+      error: (err: Error) => {
+        console.error('Error fetching survey by ID:', err);
+      },
+    });
+  }
+  /**
    * Modify an existing survey
    */
   modifyExistingSurvey(modifiedSurvey: Survey) {
     this.surveyService.updateSurvey(modifiedSurvey).subscribe({
-      next: (survey) => {
-        console.log('Survey successfully updated:', survey);
+      next: () => {
         this.submissionSuccess = true;
         this.updateSurveyForm.reset();
       },
@@ -100,8 +135,7 @@ export class SurveyUpdateComponent implements OnInit {
       return;
     }
     this.surveyService.addSurvey(addNewSurvey).subscribe({
-      next: (survey) => {
-        console.log('Survey successfully updated:', survey);
+      next: () => {
         this.submissionSuccess = true;
         this.updateSurveyForm.reset();
       },
