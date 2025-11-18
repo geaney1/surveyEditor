@@ -10,5 +10,5 @@ import { Question } from '../models/survey';
 })
 export class QuestionCardComponent {
   @Input() question: Question | undefined;
-  private title = 'Question Details'; 
+  readonly title = 'Question Details'; 
 }

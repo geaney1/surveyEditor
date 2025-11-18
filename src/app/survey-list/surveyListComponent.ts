@@ -34,7 +34,7 @@ export class SurveyListComponent implements OnInit {
     private surveyService = inject(SurveyService);
     private route = inject(ActivatedRoute);
     readonly title = 'Surveys';
-    peivate userToken = this.authService.getToken();
+    readonly userToken = this.authService.getToken();
 
     surveyListForm = new FormGroup({
         email: new FormControl(this.userToken, [

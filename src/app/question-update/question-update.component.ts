@@ -46,7 +46,7 @@ const questionTypes = [
 export class QuestionUpdateComponent implements OnInit {
   private authService = inject(AuthService);
   private surveyService = inject(SurveyService);
-  private userToken = this.authService.getToken()
+  readonly userToken = this.authService.getToken();
   survey = new Survey();
   question = new Question();
   questionCnt = 0;
@@ -78,6 +78,7 @@ export class QuestionUpdateComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    if (this.authService.getToken()) {
       this.route.queryParamMap.subscribe((params) => {
         const id = params.get('id');
         if (id) {
@@ -90,7 +91,7 @@ export class QuestionUpdateComponent implements OnInit {
             description: [this.survey.description, [Validators.minLength(0)]],
           });
         }
-     // });
+      });
     }
 
   
