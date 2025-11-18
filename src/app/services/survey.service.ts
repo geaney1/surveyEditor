@@ -35,6 +35,7 @@ export class SurveyService {
    * GET a survey by id
    */
   getSurveyById(surveyId: string): Observable<Survey> {
+    console.log('Getting survey by id:', surveyId);
     const url = `${this.baseUrl}/${surveyId}`;
     return this.http.get<Survey>(`${url}`).pipe(
       catchError((error) => {

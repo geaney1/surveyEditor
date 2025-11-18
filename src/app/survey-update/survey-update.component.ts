@@ -28,7 +28,7 @@ export class SurveyUpdateComponent implements OnInit {
   private authService = inject(AuthService);
   private surveyService = inject(SurveyService);
   private route = inject(ActivatedRoute);
-  readonly userToken = this.authService.getToken();
+  private userToken = this.authService.getToken();
   survey = new Survey;
   isAddNewSurvey = true; // set to false if updating a new survey
   private fb = inject(FormBuilder);
