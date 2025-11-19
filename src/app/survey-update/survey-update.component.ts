@@ -1,5 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SurveyService } from '../services/survey.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Survey } from '../models/survey';
@@ -28,8 +28,9 @@ export class SurveyUpdateComponent implements OnInit {
   //private authService = inject(AuthService);
   private surveyService = inject(SurveyService);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
   //readonly userToken = this.authService.getToken();
-  survey = new Survey;
+  survey = new Survey();
   isAddNewSurvey = true; // set to false if updating a new survey
   private fb = inject(FormBuilder);
   updateSurveyForm!: FormGroup;
@@ -37,20 +38,57 @@ export class SurveyUpdateComponent implements OnInit {
   submissionError = '';
   showQuestionForm = false;
   updateTitle = 'Add Survey';
+  id: string | undefined;
+
+  constructor() {
+    // Check if survey was passed via router state (from survey-card)
+    const navigation = this.router.getCurrentNavigation();
+    console.log('Constructor - navigation:', navigation);
+    console.log('Constructor - state:', navigation?.extras?.state);
+
+    if (navigation?.extras?.state) {
+      const state = navigation.extras.state as {
+        id?: string;
+      };
+      console.log('State survey:', state.id);
+
+      if (state.id) {
+        this.survey.id = state.id;
+        this.isAddNewSurvey = false;
+        console.log('Survey loaded from router state:', this.survey);
+      }
+    }
+  }
 
   ngOnInit(): void {
     this.updateSurveyForm = this.fb.group({
-      title: ['', [Validators.minLength(3)]],
-      description: ['', [Validators.minLength(0)]],
+      title: ['', [Validators.required, Validators.minLength(3)]],
+      description: ['', [Validators.required, Validators.minLength(10)]],
     });
-    this.route.queryParamMap.subscribe((params) => {
-      const id = params.get('id');
-      if (id) {
+    console.log('ngOnInit - survey.id:', this.survey.id);
+
+    // Check for path parameter (e.g., /survey-update/123)
+    this.route.paramMap.subscribe((params) => {
+      this.survey.id = params.get('id');
+      console.log('ngOnInit - Path param ID:', this.survey.id);
+
+      if (this.survey.id) {
         this.updateTitle = 'Update Survey';
-          this.isAddNewSurvey = false;
-          this.loadSurveyById(id as string);
-        }
+        this.isAddNewSurvey = false;
+        this.loadSurveyById(this.survey.id as string);
+      }
+    });
+
+    // If survey was passed via router state, populate the form
+    if (this.survey.id) {
+      this.updateTitle = 'Update Survey';
+      this.updateSurveyForm.patchValue({
+        title: this.survey.title,
+        description: this.survey.description,
       });
+      this.isAddNewSurvey = false;
+      console.log('Form populated from router state');
+    }
   }
 
   get title() {
@@ -97,12 +135,11 @@ export class SurveyUpdateComponent implements OnInit {
   loadSurveyById(id: string): void {
     this.surveyService.getSurveyById(id).subscribe({
       next: (data: Survey) => {
+        console.log(data);
         this.survey = data;
-        const title = this.survey.title ? this.survey.title : '';
-        const description = this.survey.description ? this.survey.description : '';
-        this.updateSurveyForm = this.fb.group({
-          title: [title, [Validators.minLength(3)]],
-          description: [description, [Validators.minLength(0)]],
+        this.updateSurveyForm.patchValue({
+          title: this.survey.title,
+          description: this.survey.description,
         });
       },
       error: (err: Error) => {
@@ -110,6 +147,7 @@ export class SurveyUpdateComponent implements OnInit {
       },
     });
   }
+
   /**
    * Modify an existing survey
    */
@@ -117,7 +155,7 @@ export class SurveyUpdateComponent implements OnInit {
     this.surveyService.updateSurvey(modifiedSurvey).subscribe({
       next: () => {
         this.submissionSuccess = true;
-        this.updateSurveyForm.reset();
+        //this.updateSurveyForm.reset();
       },
       error: (err) => {
         console.error('Error updating existing survey:', err);

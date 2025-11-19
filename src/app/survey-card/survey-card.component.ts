@@ -22,8 +22,8 @@ export class SurveyCardComponent {
     if (surveyId === undefined || surveyId == null) {
       return;
     }
-    this.router.navigate([`/survey-update/:${surveyId}`], {
-      state: { survey: this.survey, isAddNewSurvey: false },
+    this.router.navigate([`/survey-update/${surveyId}`], {
+      state: { id: surveyId },
     });
   }
 }
