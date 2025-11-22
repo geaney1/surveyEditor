@@ -1,12 +1,20 @@
 .question-card {
-  background-color: #b7bce6;
-  border: 1px solid #b9bbbe;
+  background-color: #e4f8d0;
+  border: 1px solid #7a96c2;
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
-  margin: 2rem;
+  margin: 0.5rem 2rem;
   border-radius: 4px;
+}
+
+.question-inline {
+  display: flex;   
+  justify-content: space-between; // 
+  align-items: center; 
+  padding: 0 1rem;  
+  margin: 0;    
 }
 
 h4 {

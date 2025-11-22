@@ -2,17 +2,21 @@
 <form class="survey-card">
   <h4>{{ survey.title }}</h4>
   <p>{{ survey.description }}</p>
-  <div>
-    @if (survey.questions && survey.questions.length > 0) {
+  <div class="align-card">
+    @if (survey.id && survey.questions && survey.questions.length > 0) {
     @for(question of survey.questions; track question.questionId) {
-    <app-question-card [question]="question"></app-question-card>
+    <app-question-card [surveyId]="survey.id" [question]="question"></app-question-card>
     }
     }
-
-    <!-- Submit Button -->
-    <button class="submit-button" type="button" (click)="onSubmit(survey.id)">
-      Edit Survey
-    </button>
+    <div class="add-question-button">
+      <button class="submit-button" type="button" (click)="onAddQuestionSubmit()">
+        Add Question
+      </button>
+    </div>
   </div>
+  <!-- Submit Button -->
+  <button class="submit-button align_left" type="button" (click)="onUpdateSurveySubmit(survey.id)">
+    Edit Survey
+  </button>
 </form>
 }

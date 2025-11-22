@@ -1,12 +1,18 @@
 <div class="question-card">
   @if(question) {
-  @if(question.options && question.options.length > 0) {
-  <p class="options-label"><strong>Q{{question.questionId}}</strong>  {{ question.questionText }}</p>
-  <ul>
-    @for(qu of question.options; track qu) {
-    <li>{{ qu }}</li>
+    <div class ="question-inline">
+    <p class="question-label">
+      <strong>Q{{ question.questionId }}</strong> {{ question.questionText }}
+    </p>
+     <button class="submit-button" type="button" (click)="onUpdateSubmit(question.questionId)">Edit Question</button>
+  </div>
+     @if(question.options && question.options.length > 0) {
+      <ul>
+        @for(qu of question.options; track qu) {
+          <li>{{ qu }}</li>
+        }
+      </ul>
     }
-  </ul>
   }
-  }
+    
 </div>

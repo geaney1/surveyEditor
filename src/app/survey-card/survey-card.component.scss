@@ -1,8 +1,8 @@
 .survey-card {
- background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  padding: 0rem 1rem;
-  margin:  0rem 1rem;
+  background-color: #f9f9f9;
+  border: 2px solid #aaa8a8;
+  padding: 0.5rem 1rem;
+  margin: 0rem 1rem;
   border-radius: 2px;
   display: flex-box;
   flex-direction: column;
@@ -10,47 +10,51 @@
 }
 
 h4 {
-    padding-bottom: 0;
-    margin-top: 0.5rem;
-    margin-bottom: 0;
-    text-align: center;
-    text-decoration: underline;
+  padding-bottom: 0;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+  text-align: center;
+  text-decoration: underline;
 }
 
 p {
-    margin-left: 2rem;
+  margin-left: 2rem;
 }
 
-
-
 button {
-    background-color: #0072b1;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    border-radius: 4px;
+  background-color: #0072b1;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  border-radius: 4px;
 }
 
 button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 button:disabled {
-    //background-color: #6c757d;
-    cursor: not-allowed;
+  //background-color: #6c757d;
+  cursor: not-allowed;
 }
 
 .submit-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    margin-right: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-right: 1rem;
 }
+.add-question-button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0rem 1rem;
+}
+
 .success {
-    margin-top: 1rem;
-    color: #28a745;
-    font-weight: bold;
+  margin-top: 1rem;
+  color: #28a745;
+  font-weight: bold;
 }

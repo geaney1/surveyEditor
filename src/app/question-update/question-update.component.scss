@@ -15,7 +15,9 @@
   gap: 1rem;
   align-items: center;
 }
+
 .text-input {
+  margin-top: 18rem;
   display: block;
 }
 
@@ -34,74 +36,41 @@
   justify-content: end;
   gap: 5rem;
 }
-
-.toggle-field {
-  padding: 0.5rem 1rem;
+.button-toggle-group {
   display: flex;
-  flex-direction: row;
-  justify-content: end;
-  gap: 5rem;
-
-  mat-slide-toggle {
-    ::ng-deep {
-      .mdc-switch {
-        height: 32px;
-        position: relative;
-      }
-
-      .mdc-switch__track {
-        height: 20px;
-        border-radius: 10px;
-      }
-
-      .mdc-switch__handle-track {
-        width: 48px;
-      }
-
-      .mdc-switch__handle {
-        width: 16px;
-        height: 16px;
-
-        // Add minus sign for unchecked state
-        &::before {
-          content: "−";
-          position: absolute;
-          font-size: 16px;
-          font-weight: bold;
-          color: white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          width: 100%;
-          height: 100%;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-        }
-      }
-
-      // Add plus sign for checked state
-      .mdc-switch--selected .mdc-switch__handle::before {
-        content: "+";
-      }
-
-      .mdc-switch--selected .mdc-switch__track::after {
-        background: #0072b1;
-      }
-
-      .mdc-switch--unselected .mdc-switch__track::after {
-        background: #ccc;
-      }
-
-      .mdc-label {
-        margin-left: 8px;
-        font-size: 14px;
-      }
-    }
-  }
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
 }
+.button-toggle-group {
+  display: flex;
+  justify-content: flex-end; // push toggles to the right
+  align-items: center;
+  gap: 1rem; // spacing between toggles
+  margin-top: 1rem;
 
-// Hide checkmarks in mat-select options
-::ng-deep .mat-mdc-option .mat-pseudo-checkbox mat-slider-toggle mat-select {
-  display: none !important;
+  // style each <p> wrapper
+  p {
+    margin: 0; // remove default paragraph spacing
+  }
+
+  ::ng-deep .mat-slide-toggle {
+    border: 2px solid #2f5877; // visible outline
+    border-radius: 4px; // rounded corners
+    padding: 0.25rem 0.5rem;
+    transition: border-color 0.2s ease;
+  }
+
+  ::ng-deep .mat-slide-toggle:hover {
+    border-color: #005a9e; // darker outline on hover
+  }
+
+  ::ng-deep .mat-slide-toggle.mat-checked {
+    border-color: #28a745; // green outline when active
+  }
+
+  ::ng-deep .mat-slide-toggle-content {
+    font-weight: 500;
+    color: #333;
+  }
 }

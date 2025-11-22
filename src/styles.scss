@@ -17,9 +17,9 @@ body {
 }
 
 .form-group {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    margin-bottom: 1rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  margin-bottom: 1rem;
 }
 
 input,
@@ -40,7 +40,6 @@ textarea {
   height: 100px;
 }
 
-
 button {
   background-color: #0072b1;
   color: white;
@@ -49,7 +48,6 @@ button {
   cursor: pointer;
   border-radius: 4px;
 }
-
 
 button:hover {
   opacity: 0.8;
@@ -61,12 +59,12 @@ button:disabled {
 }
 
 .submit-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    margin-right: 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-right: 1rem;
 }
 
 .success {
@@ -75,28 +73,37 @@ button:disabled {
   font-weight: bold;
 }
 
-  .submit-button {
-    width: 15rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    margin-right: 1rem;
-  }
+.submit-button {
+  width: 15rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  margin-right: 1rem;
+}
 
-  mat-error {
-    color: #e53935;
-    font-size: 1.2rem;
-  }
-  
-  .clear-button {
-    color: red;
-    background-color: transparent;
-    font-size: 18px;
-    width: 18px;
-    height: 18px;
-    align-items: center;
-    justify-content: center;
-    line-height: 18px;
-  }
+mat-error {
+  color: #e53935;
+  font-size: 1.2rem;
+}
+
+.clear-button {
+  color: red;
+  background-color: transparent;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  align-items: center;
+  justify-content: center;
+  line-height: 18px;
+}
+
+.mat-select-panel .mat-pseudo-checkbox {
+  display: none !important;
+}
+
+::ng-deep .mat-select-panel .mat-pseudo-checkbox {
+  opacity: 0;
+  width: 0;
+}

@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { correctQuestionIdOrder } from '../models/shared';
 //import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -43,19 +44,15 @@ export class SurveyUpdateComponent implements OnInit {
   constructor() {
     // Check if survey was passed via router state (from survey-card)
     const navigation = this.router.getCurrentNavigation();
-    console.log('Constructor - navigation:', navigation);
-    console.log('Constructor - state:', navigation?.extras?.state);
 
     if (navigation?.extras?.state) {
       const state = navigation.extras.state as {
         id?: string;
       };
-      console.log('State survey:', state.id);
 
       if (state.id) {
         this.survey.id = state.id;
         this.isAddNewSurvey = false;
-        console.log('Survey loaded from router state:', this.survey);
       }
     }
   }
@@ -65,12 +62,10 @@ export class SurveyUpdateComponent implements OnInit {
       title: ['', [Validators.required, Validators.minLength(3)]],
       description: ['', [Validators.required, Validators.minLength(10)]],
     });
-    console.log('ngOnInit - survey.id:', this.survey.id);
 
     // Check for path parameter (e.g., /survey-update/123)
     this.route.paramMap.subscribe((params) => {
       this.survey.id = params.get('id');
-      console.log('ngOnInit - Path param ID:', this.survey.id);
 
       if (this.survey.id) {
         this.updateTitle = 'Update Survey';
@@ -87,7 +82,6 @@ export class SurveyUpdateComponent implements OnInit {
         description: this.survey.description,
       });
       this.isAddNewSurvey = false;
-      console.log('Form populated from router state');
     }
   }
 
@@ -104,12 +98,6 @@ export class SurveyUpdateComponent implements OnInit {
       return;
     }
 
-    // ensure the question index are in order
-    if (this.survey?.questions) {
-      for (const [index, q] of this.survey.questions.entries()) {
-        q.questionId = index + 1;
-      }
-    }
     const selectedSurvey = {
       id: this.survey.id,
       title:
@@ -135,12 +123,15 @@ export class SurveyUpdateComponent implements OnInit {
   loadSurveyById(id: string): void {
     this.surveyService.getSurveyById(id).subscribe({
       next: (data: Survey) => {
-        console.log(data);
         this.survey = data;
         this.updateSurveyForm.patchValue({
           title: this.survey.title,
           description: this.survey.description,
         });
+         // ensure the questionIds are in order
+        if (this.survey.questions) {
+          correctQuestionIdOrder(this.survey.questions);
+        }
       },
       error: (err: Error) => {
         console.error('Error fetching survey by ID:', err);

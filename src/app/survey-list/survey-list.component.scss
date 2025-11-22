@@ -1,30 +1,63 @@
 .survey-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 1rem;
-    margin-bottom: 1rem;
-    border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
 }
+
 
 .email-input {
-    //align-items: justify-contents-between;
-    display: inline-flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; // pushes left group and submit button apart
+  gap: 1rem;                      // spacing between groups
+
+  .text-input {
+    flex: 1;                      // input field grows to fill space
+  }
+
+  .clear-button {
+    margin-left: 0.5rem;
+    color: #666;
+    &:hover {
+      color: #000;
+    }
+  }
+
+  .submit-button {
+    padding: 0.5rem 1rem;
+    background-color: #0078d4;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #005a9e;
+    }
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  }
 }
+
 
 .text-input {
-    display: flex-box;
+  display: flex-box;
 }
 
-
 .submit-button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 button:disabled {
-    background-color: #7f8389;
+  background-color: #7f8389;
 }
 
 button[matSuffix] {
@@ -37,5 +70,4 @@ button[matSuffix] {
   padding: 0;
   min-width: 24px;
   margin: 1rem;
-  
 }

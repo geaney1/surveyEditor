@@ -1,6 +1,6 @@
 <form class="survey-list" [formGroup]="surveyListForm" (ngSubmit)="onSubmit()">
-  
-  <mat-form-field class="email-input">
+<div class="email-input">
+  <mat-form-field class="text-input">
     <mat-label>Email</mat-label>
     <input matInput type="email" formControlName="email" placeholder="Enter your email" aria-label="Email">
     @if (surveyListForm.get('email')?.value) {
@@ -14,15 +14,17 @@
     @if (surveyListForm.get('email')?.hasError('required')) {
     <mat-error>Email is <strong>required</strong></mat-error>
     }
-
-    <button class="submit-button" type="submit" [disabled]="surveyListForm.invalid">Submit</button>
   </mat-form-field>
 
-  <div>
+  <button class="submit-button" type="submit" [disabled]="surveyListForm.invalid">Submit</button>
+</div>
+
+
+<div>
   @if(surveys && surveys.length > 0){
-    @for(survey of surveys; track survey.id) {
-    <app-survey-card [survey]="survey"></app-survey-card>
-    }
+  @for(survey of surveys; track survey.id) {
+  <app-survey-card [survey]="survey"></app-survey-card>
+  }
   }
 </div>
 
