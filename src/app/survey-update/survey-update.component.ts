@@ -68,21 +68,11 @@ export class SurveyUpdateComponent implements OnInit {
       this.survey.id = params.get('id');
 
       if (this.survey.id) {
-        this.updateTitle = 'Update Survey';
+        this.updateTitle = 'Edit Survey';
         this.isAddNewSurvey = false;
         this.loadSurveyById(this.survey.id as string);
       }
     });
-
-    // If survey was passed via router state, populate the form
-    if (this.survey.id) {
-      this.updateTitle = 'Update Survey';
-      this.updateSurveyForm.patchValue({
-        title: this.survey.title,
-        description: this.survey.description,
-      });
-      this.isAddNewSurvey = false;
-    }
   }
 
   get title() {
@@ -125,10 +115,10 @@ export class SurveyUpdateComponent implements OnInit {
       next: (data: Survey) => {
         this.survey = data;
         this.updateSurveyForm.patchValue({
-          title: this.survey.title,
-          description: this.survey.description,
+          title: this.survey.title || null,
+          description: this.survey.description || null,
         });
-         // ensure the questionIds are in order
+        // ensure the questionIds are in order
         if (this.survey.questions) {
           correctQuestionIdOrder(this.survey.questions);
         }

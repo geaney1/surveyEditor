@@ -41,30 +41,19 @@ const questionTypes = [
     MatOptionModule,
   ],
   templateUrl: './question-update.component.html',
-  styleUrl: './question-update.component.scss',
+  styleUrls: ['./question-update.component.scss'],
 })
 export class QuestionUpdateComponent implements OnInit {
   private surveyService = inject(SurveyService);
   survey = new Survey();
   question = new Question();
-  questionCnt = 1;
 
   qTypes = questionTypes;
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private fb = inject(FormBuilder);
-  isAddNewQuestion = true; // set to false if editing a question
+  isAddNewQuestion = true;
   updateQuestionForm!: FormGroup;
-  questionIdStr = 'Q1';
-
-  questText = '';
-  randOptionsInd = false;
-  manInd = false;
-  progNotes = '';
-  instruct = '';
-  questionCards: string[] = [];
-  questionOptions: string[] = [];
-  showQuestionForm = false;
   qId: number | null = null;
   id: string | null = null;
   submissionSuccess = false;
@@ -92,8 +81,6 @@ export class QuestionUpdateComponent implements OnInit {
       instructions: ['', [Validators.min(0)]],
     });
     // Check if survey was passed via router state (from survey-card)
-
-    //this.id = '6917add9383f5247a64592eb';
     if (this.id) {
       this.loadSurveyByIds(this.id as string);
     }
@@ -135,9 +122,8 @@ export class QuestionUpdateComponent implements OnInit {
         if (this.qId && this.survey.questions.length >= this.qId) {
           // update question
           this.question = this.survey.questions[this.qId - 1];
-          this.questionIdStr = `Q${this.qId}`;
           this.isAddNewQuestion = false;
-          this.updateTitle = 'Modify Question';
+          this.updateTitle = 'Edit Question';
 
           this.updateQuestionForm.patchValue({
             questionType: this.question.questionType || 1,
@@ -151,8 +137,6 @@ export class QuestionUpdateComponent implements OnInit {
           });
         } else {
           //add new question
-          this.isAddNewQuestion = true;
-          this.updateTitle = 'Add Question';
           this.question.questionId = this.survey.questions.length + 1;
         }
       },

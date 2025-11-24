@@ -1,11 +1,11 @@
 export class Survey {
-  id: string | null = null;
-  title: string | null = null;
-  description: string | null = null;
-  questions: Question[] | null = null;
+  id: string | null;
+  title: string | null;
+  description: string | null;
+  questions: Question[] | null;
 
   constructor() {
-    this.id = '';
+    this.id = null;
     this.title = '';
     this.description = '';
     this.questions = [];
@@ -13,15 +13,15 @@ export class Survey {
 }
 
 export class Question {
-  questionId = 1;
-  questionText: string | null = null;
-  mandatoryInd = false;
-  questionType = 1;
-  options: string[] | null = null;
-  randomizeOptionsInd: boolean | null = false;
-  cards: string[] | null = null;
-  programmerNotes: string | null = null;
-  instructions: string | null = null;
+  questionId: number;
+  questionText: string | null;
+  mandatoryInd?: boolean;
+  questionType: number;
+  options: string[] | null;
+  randomizeOptionsInd: boolean;
+  cards: { card: string }[] | null;
+  programmerNotes: string | null;
+  instructions: string | null;
 
   constructor() {
     this.questionId = 1;
@@ -29,7 +29,7 @@ export class Question {
     this.mandatoryInd = false;
     this.questionType = 1;
     this.options = [];
-    this.randomizeOptionsInd = false
+    this.randomizeOptionsInd = false;
     this.cards = [];
     this.programmerNotes = '';
     this.instructions = '';

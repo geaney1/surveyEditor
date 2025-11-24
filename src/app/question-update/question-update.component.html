@@ -1,7 +1,8 @@
 <form class="update-question" [formGroup]="updateQuestionForm"(ngSubmit)="onQuestionSubmit()">
+  <h2>{{ updateTitle }}</h2>
   <div class="id-and-type">
     <!--- Question ID  --->
-    <button mat-button class="id-input" type="button" aria-label="Question ID" disabled>{{ questionIdStr }}</button>
+    <button mat-button class="id-input" type="button" aria-label="Question ID" disabled>Q{{ qId }}</button>
 
     <!--- Question Type Input -->
     <mat-form-field>
@@ -24,15 +25,34 @@
       <mat-icon>X</mat-icon>
     </button>
     }
-    @if (updateQuestionForm.get('questionText')?.hasError('questionText') &&
-    !updateQuestionForm.get('questionText')?.hasError('required')) {
-    <mat-error>Please enter a valid question</mat-error>
-    }
-    @if (updateQuestionForm.get('questionText')?.hasError('required')) {
-    <mat-error>Title is <strong>required</strong></mat-error>
+  </mat-form-field>
+
+
+    <!--- Programmer Notes Input --->
+  <mat-form-field class="text-input">
+    <mat-label>Programmer Notes</mat-label>
+    <input matInput type="text" formControlName="programmerNotes" aria-label="Programmer Notes"
+           placeholder="Enter the programmer notes">
+    @if (updateQuestionForm.get('programmerNotes')?.value) {
+    <button matSuffix matIconButton class="clear-button" aria-label="Clear"
+            (click)="updateQuestionForm.patchValue({  programmerNotes: '' })">
+      <mat-icon>X</mat-icon>
+    </button>
     }
   </mat-form-field>
 
+   <!--- Instructions Input --->
+  <mat-form-field class="text-input">
+    <mat-label>Instructions</mat-label>
+    <input matInput type="text" formControlName="instructions" aria-label="Instructions"
+           placeholder="Enter the instructions">
+    @if (updateQuestionForm.get('instructions')?.value) {
+    <button matSuffix matIconButton class="clear-button" aria-label="Clear"
+            (click)="updateQuestionForm.patchValue({  instructions: '' })">
+      <mat-icon>X</mat-icon>
+    </button>
+    }
+  </mat-form-field>
 
  <div class="button-toggle-group">
     <!--- Randomize Options Toggle --->
@@ -41,10 +61,11 @@
     <p><mat-slide-toggle formControlName="mandatoryInd" labelPosition="before">Make Required</mat-slide-toggle></p>
   </div>
   
- <!-- Submit Button -->
+  
+  <!-- Submit Button -->
   <button class="submit-button" type="submit"
           [disabled]="survey === null || updateQuestionForm.invalid">
-    Save
+    Save Question
   </button>
 </form>
 

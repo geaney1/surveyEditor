@@ -3,6 +3,19 @@ html {
   font-size: 62.5%; /* setting the default to 10px */
   box-sizing: border-box;
 }
+h2,
+h3,
+h4 {
+  padding: 0;
+  margin: 0.5rem;
+}
+
+.text-input {
+  margin: 0;
+  padding: 0;
+  display: flex-box;
+}
+
 *,
 *:before,
 *:after {
@@ -89,7 +102,22 @@ mat-error {
 }
 
 .clear-button {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
   color: red;
+  background-color: transparent;
+  //font-size: 18px;
+  //width: 18px;
+  //height: 18px;
+  align-items: center;
+  justify-content: center;
+  //line-height: 18px;
+  &:hover {
+    opacity: 0.8;
+  }
+}
+/*
+.clear-button {
   background-color: transparent;
   font-size: 18px;
   width: 18px;
@@ -97,13 +125,8 @@ mat-error {
   align-items: center;
   justify-content: center;
   line-height: 18px;
-}
+}*/
 
 .mat-select-panel .mat-pseudo-checkbox {
   display: none !important;
-}
-
-::ng-deep .mat-select-panel .mat-pseudo-checkbox {
-  opacity: 0;
-  width: 0;
 }

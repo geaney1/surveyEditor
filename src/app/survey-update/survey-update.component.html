@@ -1,6 +1,5 @@
-<h2>{{ updateTitle }}</h2>
-
 <form class="update-survey" [formGroup]="updateSurveyForm" (ngSubmit)="onSubmit()">
+  <h2>{{ updateTitle }}</h2>
 
 <!--- Survey Title Input --->
 <mat-form-field class="text-input">
@@ -30,10 +29,7 @@
       <mat-icon>X</mat-icon>
     </button>
   }
-  <!--
-  @if (updateSurveyForm.get('description')?.hasError('description') && !updateSurveyForm.get('description')?.hasError('required')) {
-    <mat-error>Please enter a valid description</mat-error>
-} -->
+
   @if (updateSurveyForm.get('description')?.hasError('required')) {
     <mat-error>Description is <strong>required</strong></mat-error>
 } 

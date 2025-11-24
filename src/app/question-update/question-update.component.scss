@@ -1,15 +1,13 @@
-.question-update {
-  background-color: #b7bce6;
-  border: 1px solid #b9bbbe;
+.update-question {
+  margin: 2rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  padding: 2rem;
-  margin: 2rem;
-  border-radius: 4px;
 }
 
 .id-and-type {
+  margin : 0;
+  padding: 0;
   display: flex;
   flex-direction: row;
   gap: 1rem;
@@ -17,8 +15,8 @@
 }
 
 .text-input {
-  margin-top: 18rem;
-  display: block;
+  //margin: 0rem;
+  //display: block;
 }
 
 .id-input {
@@ -36,12 +34,7 @@
   justify-content: end;
   gap: 5rem;
 }
-.button-toggle-group {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  margin-top: 1rem;
-}
+
 .button-toggle-group {
   display: flex;
   justify-content: flex-end; // push toggles to the right
@@ -62,15 +55,16 @@
   }
 
   ::ng-deep .mat-slide-toggle:hover {
-    border-color: #005a9e; // darker outline on hover
+    opacity: 0.8;
   }
 
   ::ng-deep .mat-slide-toggle.mat-checked {
-    border-color: #28a745; // green outline when active
+    //border-color: #3f4240; 
+
   }
 
   ::ng-deep .mat-slide-toggle-content {
     font-weight: 500;
-    color: #333;
+    background-color: #0078d4;
   }
 }
