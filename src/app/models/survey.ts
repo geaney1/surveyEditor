@@ -19,7 +19,7 @@ export class Question {
   questionType: number;
   options: string[] | null;
   randomizeOptionsInd: boolean;
-  cards: { card: string }[] | null;
+  cards: string[] | null;
   programmerNotes: string | null;
   instructions: string | null;
 
